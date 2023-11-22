@@ -13,4 +13,4 @@ RUN pip install -r requirements
 
 EXPOSE 8081
 
-CMD ["manage.py", "runserver"] 
+CMD manage.py runserver
