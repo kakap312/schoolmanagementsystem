@@ -4,7 +4,7 @@ WORKDIR ./sms
 
 COPY manage.py ./sms
 
-COPY . ./sms
+COPY . .
 
 RUN pip install -r requirements
 
