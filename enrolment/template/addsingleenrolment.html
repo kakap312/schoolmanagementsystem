@@ -1,0 +1,53 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{%block pagetitle%}
+<h1>Enrolment</h1>
+
+{%endblock%}
+
+{%block body%}
+<div class="row">
+    <div class="col-md-12">
+        {%include 'enrolmentheader.html'%}
+    </div>
+
+    <div class="col-md-6">
+        <h3>Enrolment Screen </h3>
+        <p>Please fill in the field provided below to make a new entry for a Enrolment</p>
+        <form action="{% url 'newentrysingle' %}" class="login-form" method="post" id = "form">
+            {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert"> ×</button>
+                        <strong>{{message}}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <select class="form-control" name="studentName">
+                {% for student in students%}
+                        <option value = {{student.id}}>{{student.lastname |add:" " |add:student.middlename |add:" " |add:student.firstname}}</option>
+                {%endfor%}
+        </select>
+        <select class="form-control" name="className">
+        {% for class in classes%}
+            <option value = {{class.id}}>{{class.name}}</option>
+    {%endfor%}
+</select>
+            {% csrf_token %}
+            {{ form|crispy }}
+            
+            <div class="form-group">
+                <button type="submit" class="btn form-control btn-primary rounded submit px-3">Enrol
+                    </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+{%endblock%}

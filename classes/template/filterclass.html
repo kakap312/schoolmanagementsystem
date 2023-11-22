@@ -1,0 +1,80 @@
+{% extends 'dashboard.html' %}
+{%block pagetitle%}
+<h1>Parent</h1>
+
+{%endblock%}
+
+{%block body%}
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            {%include 'header.html'%}
+        </div>
+        <div class="col-md-12">
+            <div class="search-bar">
+                <form action = "{% url 'filter' %}" class="search-form d-flex align-items-center" method="POST" >
+                    {% csrf_token %}
+                    <input style="width: 100%;" type="text" name="searchkey" placeholder="Parents Id / Name" title="Enter search keyword">
+                  <button type="submit" title="Search" style="margin-bottom: 20px;"><i class="bi bi-search"></i></button>
+                </form>
+              </div><!-- End Search Bar --><br>
+        </div>
+        <div><hr>
+            {%if parent %}
+            <h3>Guardian Info:</h3><hr>
+            <table border="0">
+                <tr>
+                    <td><b>Parent No:</b></td>
+                    <td>{{parent.parentNo}}</td>
+                </tr>
+                <tr>
+                    <td><b>Father's Name:</b></td>
+                    <td>{{parent.fatherName}}</td>
+                </tr>
+                <tr>
+                    <td><b>Date Created:</b></td>
+                    <td>{{parent.createdAt}}</td>
+                </tr>
+            </table>
+            {%else%}
+            <h3>No records Found</h3>
+            {%endif%}
+        </div>
+        
+        <div class="col-md-12"><br><br>
+            
+                {%if students|length == 0 %}
+                <h3>No record found</h3>
+                {%else%}
+                <hr><h3>Ward's Info:</h3><hr>
+                <table class="table">
+                    <tr>
+                        <th>Student No</th>
+                        <th>Date Created</th>
+                        <th>Student name:</th>
+                        <th>Gender:</th>
+                        <th>Religion:</th>
+                        <th>Nationality:</th>
+                        <th>Current Class:</th>
+                    </tr>
+                {% for student in students%}
+                <tr>
+                    <td>{{student.studentNo}}</td>
+                    <td>{{student.createdAt}}</td>
+                    <td>{{student.firstname |add:" " | add:student.middlename | add:" " | add:student.lastname}}</td>
+                    <td>{{student.gender}}</td>
+                    <td>{{student.religion}}</td>
+                    <td>{{student.nationality}}</td>
+                    <td>{{student.previousSchoolClass}}</td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+
+            </table>
+          </div><!-- End Search Bar -->
+    </div>
+</section>
+
+
+{%endblock%}

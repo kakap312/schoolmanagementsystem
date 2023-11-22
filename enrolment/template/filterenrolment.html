@@ -1,0 +1,63 @@
+{% extends 'dashboard.html' %}
+{%block pagetitle%}
+<h1>Enrolment</h1>
+
+{%endblock%}
+
+{%block body%}
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            {%include 'enrolmentheader.html'%}
+        </div>
+        <div class="col-md-8">
+            <div class="search-bar">
+                <form action = "{% url 'filterenrolment' %}" class="search-form d-flex align-items-center" method="POST" >
+                    {% csrf_token %}
+                    <select class="form-control" name="classname">
+                        {% for class in classes%}
+                            <option value = {{class.id}}>{{class.name}}</option>
+                        {%endfor%}
+                    </select> &nbsp &nbsp 
+                    <input class="form-control"  type="number" name="year" placeholder="year" > &nbsp 
+                    <input class="form-control"  type="number" name="term" placeholder="term" > &nbsp 
+                  <button type="submit" title="Search" style="margin-bottom: 20px;" class="btn btn-primary">filter</button>
+                </form>
+              </div><!-- End Search Bar --><br>
+        </div>
+        
+        <div class="col-md-12">
+            
+            {%if parents|length == 0%}
+            <h3>No Records Found </h2>
+            {%else%}
+           
+            <table class="table">
+                <tr>
+                    <th>Student Name </th>
+                    <th>Gender</th>
+                    <th>Class Name</th>
+                    <th>term:</th>
+                    <th>year:</th>
+                    <th>Actions:</th>
+                </tr>
+            {% for parent in parents%}
+            <tr>
+                <td>{{parent.studentId.lastname |add:" " |add:parent.studentId.middlename |add:" " |add:parent.studentId.firstname}}</td>
+                <td>{{parent.studentId.gender}}</td>
+                <td>{{parent.classId.name}}</td>
+                <td>{{parent.term}}</td>
+                <td>{{parent.year}}</td>
+                <td><a href="/dashboard/enrol/delete/{{parent.id}}"><button class =" btn btn-danger btn-sm">Delete</button></a> &nbsp<a href="/dashboard/enrol/edit/{{parent.id}}"></a></td>
+            </tr>
+            {%endfor%}
+            {%endif%}
+
+        </table>
+      </div><!-- End Search Bar -->
+    </div>
+</section>
+
+
+{%endblock%}

@@ -1,0 +1,79 @@
+{% extends 'dashboard.html' %}
+{%block pagetitle%}
+<h1>Bill</h1>
+
+{%endblock%}
+
+{%block body%}
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            {%include 'billheader.html'%}
+        </div>
+        <div class="col-md-8">
+            <div class="search-bar">
+                <form action = "{% url 'filterbill' %}" class="search-form d-flex align-items-center" method="POST" >
+                    {% csrf_token %}
+                    <select class="form-control" name="classname">
+                        {% for class in classes%}
+                            <option value = {{class.id}}>{{class.name}}</option>
+                        {%endfor%}
+                    </select> &nbsp &nbsp 
+                    <input class="form-control"  type="number" name="year" placeholder="year" > &nbsp 
+                    <input class="form-control"  type="number" name="term" placeholder="term" > &nbsp 
+                  <button type="submit" title="Search" style="margin-bottom: 20px;" class="btn btn-primary">filter</button>
+                </form>
+              </div><!-- End Search Bar --><br>
+        </div>
+        
+        <div class="col-md-12">
+            
+            {%if parents|length == 0%}
+            <h3>No Records Found </h2>
+            {%else%}
+           
+            <table class="table">
+                <tr>
+                    <th>Bill No:</th>
+                    <th>Bill Purpose:</th>
+                    <th>student Name:</th>
+                    <th>term:</th>
+                    <th>year:</th>
+                    <th>Ampunt(GHC):</th>
+                    <th>Actions:</th>
+                </tr>
+            {% for parent in parents%}
+        
+            <tr>
+                <td>{{parent.billNo}}</td>
+                <td>{{parent.fees.name}}</td>
+                <td>{{parent.student.lastname |add:" " |add:parent.student.middlename |add:" " |add:parent.student.firstname}}</td>
+                
+                <td>{{parent.term}}</td>
+                
+                <td>{{parent.year}}</td>
+                <td>{{parent.amount}}</td>
+                <td><a href="/dashboard/bill/delete/{{parent.id}}"><button class =" btn btn-danger btn-sm">Delete</button></a> &nbsp<a href="/dashboard/enrol/bill/{{parent.id}}"></a></td>
+            </tr>
+
+            {%endfor%}
+            <tr >
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Total Amount:</b></td>
+                <td><b>{{totalamount}}</b></td>
+                <td></td>
+
+            </tr>
+            {%endif%}
+
+        </table>
+      </div><!-- End Search Bar -->
+    </div>
+</section>
+
+
+{%endblock%}
