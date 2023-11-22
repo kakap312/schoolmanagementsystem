@@ -1,0 +1,65 @@
+{% extends 'dashboard.html' %}
+{% load mathfilters %}
+
+{%block pagetitle%}
+<h1>Student</h1>
+{%endblock%}
+
+
+{%block body%}
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            {%include 'studentheader.html'%}
+        </div>
+
+        <div class="col-md-12">
+            <div class="search-bar">
+                <form action = "{% url 'searchstudent' %}" class="search-form d-flex align-items-center" method="POST" >
+                    {% csrf_token %}
+                    <input class="form-control form-control-sm" style="width: 100%;" type="text" name="searchkey" placeholder="students Id | Name | age" title="Enter search keyword">
+                  <button type="submit" title="Search" style="margin-bottom: 20px;"><i class="bi bi-search"></i></button>
+                </form>
+              </div><!-- End Search Bar --><br>
+        </div>
+        
+        <div class="col-md-12">
+            
+                {%if students|length == 0%}
+                <h1>No Data Found </h1>
+                {%else%}
+               
+                <table class="table">
+                    <tr>
+                        <th>Student No</th>
+                        <th>Date Created</th>
+                        <th>Student name:</th>
+                        <th>Gender:</th>
+                        <th>Age:</th>
+                        <th>Religion:</th>
+                        <th>Nationality:</th>
+                        <th>Actions:</th>
+                    </tr>
+            
+                {% for student in students%}
+                <tr>
+                    <td>{{student.studentNo}}</td>
+                    <td>{{student.createdAt}}</td>
+                    <td>{{student.firstname |add:" " | add:student.middlename | add:" " | add:student.lastname}}</td>
+                    <td>{{student.gender}}</td>
+                    <td>{{currentyear|sub:student.dob.year}}</td>
+                    <td>{{student.religion}}</td>
+                    <td>{{student.nationality}}</td>
+                    <td><a href="/dashboard/students/delete/{{student.id}}"><button class =" btn btn-danger btn-sm">Delete</button></a> &nbsp<a href="/dashboard/students/edit/{{student.id}}"><button class = "btn btn-secondary btn-sm">Edit</button></a></td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+
+            </table>
+          </div><!-- End Search Bar -->
+    </div>
+</section>
+
+
+{%endblock%}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Sign Up</title>
+{%endblock%}
+
+{%block content%}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-6">
+
+                <div class="login-wrap py-5">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert"> ×</button>
+                        <strong>{{message}}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <h3 class="mb-0">Sign Up</h3>
+                    <p>Join our community today and enjoy a better experience.</p>
+                    <form action="{% url 'signup' %}" class="login-form" method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="form-group">
+                            <button type="submit" class="btn form-control btn-primary rounded submit px-3">Create
+                                Profile</button>
+                        </div>
+                    </form>
+                    <div class="w-100 text-center mt-4 text">
+                        <p class="mb-0">Already have an account ? <span><a href="{% url 'signin'  %}">sign in
+                                </a></span> or <span><a href="{% url 'userprofile'  %}">user profile</a></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}

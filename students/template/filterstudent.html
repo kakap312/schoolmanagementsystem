@@ -1,0 +1,59 @@
+{% extends 'dashboard.html' %}
+
+{%block pagetitle%}
+<h1>Student</h1>
+{%endblock%}
+
+{%block body%}
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            {%include 'studentheader.html'%}
+        </div>
+        <div class="col-md-12">
+            <div class="search-bar">
+                <form action = "{% url 'filterstudent' %}" class="search-form d-flex align-items-center" method="POST" >
+                    {% csrf_token %}
+                    <input style="width: 100%;" type="text" name="searchkey" placeholder="Class(eg p2) " title="Enter search keyword">
+                  <button type="submit" title="Search" style="margin-bottom: 20px;"><i class="bi bi-search"></i></button>
+                </form>
+              </div><!-- End Search Bar --><br>
+        </div>
+
+        <div class="col-md-12">
+            
+            {%if students|length == 0%}
+            <h3>No Data Found </h3>
+            {%else%}
+           
+            <table class="table">
+                <tr>
+                    <th>Student No</th>
+                    <th>Student name:</th>
+                    <th>Gender:</th>
+                    <th>Current Class:</th>
+                    <th>Fathers Name:</th>
+                    <th>Tel:</th>
+                    <!-- <th>Actions:</th> -->
+                </tr>
+            {% for student in students%}
+            <tr>
+                <td>{{student.studentId.studentNo}}</td>
+                <td>{{student.studentId.firstname |add:" " | add:student.studentId.middlename | add:" " | add:student.studentId.lastname}}</td>
+                <td>{{student.studentId.gender}}</td>
+                <td>{{student.classId.name}}</td>
+                <td>{{student.studentId.parentId.fatherName}}</td>
+                <td>{{student.studentId.parentId.fatherPhonenumber}}</td>
+                <!-- <td><a href="/dashboard/students/delete/{{student.id}}"><button class =" btn btn-danger btn-sm">Delete</button></a> &nbsp<a href="/dashboard/students/edit/{{student.id}}"><button class = "btn btn-secondary btn-sm">Edit</button></a></td> -->
+            </tr>
+            {%endfor%}
+            {%endif%}
+
+        </table>
+      </div><!-- End Search Bar -->
+    </div>
+</section>
+
+
+{%endblock%}
