@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -70,7 +70,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'account', 'templates'),
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'account', 'templates','account'),
             # r"C:\Users\stev\Desktop\myenv\SCHOOLMANAGEMENTSYSTEM\parents\template",
             # r"C:\Users\stev\Desktop\myenv\SCHOOLMANAGEMENTSYSTEM\sales\template", 
             # r"C:\Users\stev\Desktop\myenv\SCHOOLMANAGEMENTSYSTEM\account\template",
