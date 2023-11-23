@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0vix_w(31%o^nstx$wdnb1mm&*f5=5tu*h#kvu&gt=e(r&i+x$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["schoolmanagementsystem-production.up.railway.app"]
+ALLOWED_HOSTS = ["schoolmanagementsystem-production.up.railway.app","127.0.0.1"]
 
 
 # Application definition
@@ -71,7 +71,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'account', 'templates','account'),
+            # os.path.join(BASE_DIR, 'account', 'templates','account'),
+            # os.path.join(BASE_DIR, 'parents', 'templates','parents'),
             # r"C:\Users\stev\Desktop\myenv\SCHOOLMANAGEMENTSYSTEM\parents\template",
             # r"C:\Users\stev\Desktop\myenv\SCHOOLMANAGEMENTSYSTEM\sales\template", 
             # r"C:\Users\stev\Desktop\myenv\SCHOOLMANAGEMENTSYSTEM\account\template",
@@ -144,7 +145,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = ['https://schoolmanagementsystem-production.up.railway.app/static']
+STATIC_URL =  'static/'       #'https://schoolmanagementsystem-production.up.railway.app/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
