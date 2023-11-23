@@ -1,16 +1,26 @@
 FROM python:3.12.0-slim
 
-WORKDIR ./sms
+# setup environment variable  
+ENV DockerHOME=/home/app/webapp  
 
-COPY manage.py ./sms
+# set work directory  
+RUN mkdir -p $DockerHOME  
 
-COPY . .
+# where your code lives  
+WORKDIR $DockerHOME  
 
-RUN pip install -r requirements
+# set environment variables  
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1  
 
+# install dependencies  
+RUN pip install --upgrade pip  
 
-
-
-EXPOSE 8081
-
-CMD manage.py runserver
+# copy whole project to your docker home directory. 
+COPY . $DockerHOME  
+# run this command to install all dependencies  
+RUN pip install -r requirements  
+# port where the Django app runs  
+EXPOSE 8000  
+# start server  
+CMD python manage.py runserver  
