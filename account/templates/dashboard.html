@@ -17,8 +17,14 @@
     </div><!-- End Logo -->
 
     <div class="d-flex align-items-center justify-content-between">
-      <p>Academic year: {{year}} </p> &nbsp
-      <p>Term: {{term}} </p>
+      <p>Academic year: {%if year%}
+        {{year}} 
+        {%endif%} </p> &nbsp
+      <p>Term:
+        {%if term%}
+        {{term}} 
+        {%endif%}
+         </p>
     </div><!-- End Logo -->
 
     

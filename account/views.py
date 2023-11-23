@@ -51,8 +51,12 @@ def signup(request):
         # return render(request,"signup.html")
 
 def dashboard(request):
+        
         if request.session['username']:
-            return render(request,"statistics.html",{'year':request.session['year'],'term':request.session['term']})
+            try:
+                return render(request,"statistics.html",{'year':request.session['year'],'term':request.session['term']})
+            except:
+                return render(request,"statistics.html")
         else:
          form = SigninForm()
          return render(request,"signin.html",{'form': form})
