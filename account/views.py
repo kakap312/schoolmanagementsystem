@@ -46,9 +46,9 @@ def signup(request):
             form = SignupForm()
             return render(request,"signup.html",{'form': form}) 
     else:
-        form = SignupForm()
-        return render(request,"signup.html",{'form': form})
-        # return render(request,"signup.html")
+        # form = SignupForm()
+        # return render(request,"signi.html",{'form': form})
+        return render(request,"signin.html")
 
 def dashboard(request):
         
@@ -68,7 +68,7 @@ def recoverPassword(request):
     return render(request,"recoverpassword.html")
 
 def userprofile(request):
-    return render(request,"user.html")
+    return render(request,"signin.html")
     # if request.method == "POST":
     #     form = UserForm(request.POST)
     #     if form.is_valid():
