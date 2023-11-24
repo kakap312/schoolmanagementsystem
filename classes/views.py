@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from .forms.addclassform import *
+from .forms.subjectassignmentform import *
 from django.contrib import messages
 from .service import *
 from django.db.models import Q
@@ -45,6 +46,14 @@ def addParent(request):
     else:
         addParentForm = AddClassForm()
         return render(request,"addclass.html",{'form':addParentForm})
+    
+def assignclass(request):
+    if request.method == "POST":
+        return 
+    else:
+        assignClassForm = AssignSubjectForm()
+        return render(request,"assignclass.html",{'form':assignClassForm})
+
     
 def searchParent(request):
     searchKey = request.POST.get('searchkey')

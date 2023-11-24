@@ -35,7 +35,7 @@ def add(request):
                  parent = Subjects.objects.filter(id = request.POST.get("id")).first()
                  parent.name = addParentForm.cleaned_data['name']
                  parent.save()
-                 messages.success(request,f"Fee updated successfully.")
+                 messages.success(request,f"Subject updated successfully.")
                  return render(request,"addsubject.html",{'form': addParentForm})
                  
         else:
@@ -45,24 +45,31 @@ def add(request):
         addParentForm = AddSubjectForm()
         return render(request,"addsubject.html",{'form':addParentForm})
     
-# def search(request):
-#     searchKey = request.POST.get('searchkey')
-#     searchResult  = Fees.objects.filter(Q(feeNo = searchKey) | Q(name__startswith = searchKey))
-#     return render(request,"feeview.html",{'parents':searchResult})
+def search(request):
+    try:
+        searchKey = request.POST.get('searchkey')
+        searchResult  = Subjects.objects.filter(Q(subjectNo = searchKey) | Q(name__startswith = searchKey))
+        return render(request,"subjectview.html",{'parents':searchResult})
+    except:
+         return render(request,"subjectview.html",{'parents':Subjects.objects.all()})
+    
 
-# def delete(request,id):
-#     parent = Fees.objects.filter(id = id)
-#     parent.delete()
-#     parents = Fees.objects.all()
-#     return render(request,"feeview.html",{'parents':parents})
+    
 
-# def edit(request,id):
-#     parent = Fees.objects.filter(id = id).first()
-#     addParentForm = AddFeesForm(data={
-#         "id":parent.id,
-#         "name":parent.name,
-#         })
-#     return render(request,"addfee.html",{'form':addParentForm})
+def delete(request,id):
+    subjects = Subjects.objects.filter(id = id)
+    subjects.delete()
+    subjects = Subjects.objects.all()
+    return render(request,"subjectview.html",{'parents':subjects})
+
+def edit(request,id):
+    parent = Subjects.objects.filter(id = id).first()
+    addParentForm = AddSubjectForm(data={
+        "id":parent.id,
+        "name":parent.name,
+        "label":parent.label,
+        })
+    return render(request,"addsubject.html",{'form':addParentForm})
 
 # def filter(request):
 #     searchKey = request.POST.get('searchkey')
