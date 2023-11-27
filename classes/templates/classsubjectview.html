@@ -1,0 +1,48 @@
+{% extends 'dashboard.html' %}
+
+{%block pagetitle%}
+<h1>Class-Subject</h1>
+
+{%endblock%}
+
+{%block body%}
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            {%include 'classheader.html'%}
+        </div>
+        
+        <div class="col-md-12">
+            {%if classes%}
+                <h4>Class Info:</h4><hr/>
+                <p><b>Class No: </b>{{classes.classNo}}</p>
+                <p><b>Class Name:</b> {{classes.name}}</p>
+                <p><b>Class Label:</b> {{classes.label}}</p><br>
+            {%endif%}
+                {%if classsubjects|length == 0%}
+                <h1>No record Found </h1> 
+                {%else%}
+               
+                <table class="table">
+                    <tr>
+                        <th>Subject No</th>
+                        <th>Date Created</th>
+                        <th>Subject Name:</th>
+                    </tr>
+                {% for classsubject in classsubjects%}
+                <tr>
+                    <td>{{classsubject.subject.subjectNo}}</td>
+                    <td>{{classsubject.createdAt}}</td>
+                    <td>{{classsubject.subject.name}}</td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+
+            </table>
+          </div><!-- End Search Bar -->
+    </div>
+</section>
+
+
+{%endblock%}

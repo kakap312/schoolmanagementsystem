@@ -8,5 +8,6 @@ urlpatterns = [
     path("dashboard/class/search", views.searchParent, name = 'searchclass'),
     path("dashboard/class/assign", views.assignclass, name = 'classassignment'),
     path("dashboard/class/delete/<int:id>", views.deleteParent, name = 'deleteclass'),
+    path("dashboard/class/subjects/<int:id>", views.viewClassSubject, name = 'viewclasssubject'),
     path("dashboard/class/edit/<int:id>", views.editParent, name = 'editclass')
 ]

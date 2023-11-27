@@ -48,8 +48,22 @@ def addParent(request):
         return render(request,"addclass.html",{'form':addParentForm})
     
 def assignclass(request):
+    assignClassForm = AssignSubjectForm(request.POST)
     if request.method == "POST":
-        return 
+        subjectsId = request.POST.getlist('subject')
+        classesId = request.POST.get('Classes')
+        classes = Classes.objects.filter(id = classesId).first()
+       
+        for subjectid in subjectsId:
+            subject = Subjects.objects.filter(id = subjectid).first()
+            
+            if not ClassSubjectAssignment.objects.filter(subject = subject,classes = classes):
+                classAssignment = ClassSubjectAssignment()
+                classAssignment.classes = classes
+                classAssignment.subject = subject
+                classAssignment.save()
+        messages.success(request,f"subject Assignment done succesfully.")
+        return render(request,"assignclass.html",{'form':AssignSubjectForm()}) 
     else:
         assignClassForm = AssignSubjectForm()
         return render(request,"assignclass.html",{'form':assignClassForm})
@@ -86,3 +100,9 @@ def filterParent(request):
              return render(request,"filterparent.html",{'parent':parent})    
     else:
         return render(request,"filterparent.html")
+    
+def viewClassSubject(request,id):
+    classes = Classes.objects.filter(id = id).first()
+    classSubject = ClassSubjectAssignment.objects.filter(classes = classes).all()
+    return render(request,"classsubjectview.html", {'classsubjects':classSubject,'classes':classes})
+

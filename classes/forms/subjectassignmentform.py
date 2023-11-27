@@ -21,7 +21,7 @@ class AssignSubjectForm(forms.Form):
         for subject in Subjects.objects.all():
             self.__class__.SUBJECTS.append((subject.id,subject.name))
         self.fields['Classes'] = forms.ChoiceField(choices= self.__class__.CLASSES)
-        self.fields['subject'] = forms.ChoiceField(choices= self.__class__.SUBJECTS,widget=forms.Select(attrs={"class":"js-example-basic-multiple","multiple":"multiple"}))
+        self.fields['subject'] = forms.ChoiceField(choices= self.__class__.SUBJECTS,widget=forms.Select(attrs={"class":"js-example-basic-multiple form-control","multiple":"multiple","required":"required"}))
 
     
     field_order = ['Classes','fee_type']

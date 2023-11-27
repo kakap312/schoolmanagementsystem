@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 class SettingForm(forms.Form):
     academicYear = forms.IntegerField(required=True)
-    term = forms.IntegerField(max_value=1,)
+    term = forms.IntegerField(max_value=3,)
 
     def clean(self):
         if self.cleaned_data.get('academicYear') <= 0:
