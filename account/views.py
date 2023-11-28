@@ -64,7 +64,7 @@ def dashboard(request):
                                                          })
             except:
                 return render(request,"statistics.html",
-                              {"students":len(Students.objects.all)}
+                              {"students":len(Students.objects.all())}
                               )
         else:
          form = SigninForm()
