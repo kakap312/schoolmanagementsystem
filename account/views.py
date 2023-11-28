@@ -7,6 +7,8 @@ import bcrypt
 from django.shortcuts import redirect
 from django.contrib import messages
 from account.models import Account
+from students.models import *
+from classes.models import *
 
 
 # Create your views here.
@@ -54,9 +56,16 @@ def dashboard(request):
         
         if request.session['username']:
             try:
-                return render(request,"statistics.html",{'year':request.session['year'],'term':request.session['term']})
+                return render(request,"statistics.html",{'year':request.session['year'],'term':request.session['term'],
+                                                         "students":len(Students.objects.all()),
+                                                         "classes":len(Classes.objects.all()),
+                                                         "parents":len(Parents.objects.all())
+                                                         
+                                                         })
             except:
-                return render(request,"statistics.html")
+                return render(request,"statistics.html",
+                              {"students":len(Students.objects.all)}
+                              )
         else:
          form = SigninForm()
          return render(request,"signin.html",{'form': form})
