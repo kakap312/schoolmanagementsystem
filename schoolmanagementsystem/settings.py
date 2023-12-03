@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     "enrolment",
     "mathfilters",
     "billing",
-    "subjects"
+    "subjects",
+    "payments",
+    "num2words"
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

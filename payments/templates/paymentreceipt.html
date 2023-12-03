@@ -1,0 +1,58 @@
+{% extends 'dashboard.html' %}
+{%load static%}
+{%block pagetitle%}
+<h1>Payment</h1><br>
+
+{%endblock%}
+
+{%block body%}
+
+<section>
+    <div class="row">
+        
+        <div class="col-md-12">
+            {%include 'paymentheader.html'%}
+        </div><br>
+        
+        
+        <div class="col-md-9" id="paymentreceiptsection">
+            <center>
+            <div>
+                <img src="{% static 'assets/img/apple-touch-icon.png' %}" alt="">
+                <h4> Official Receipt</h4>
+            </div>
+                <table class="table">
+                    <tr>
+                        <th>Student No:</th>
+                        <td>{{student.studentNo}}</td> 
+                        <th>Date Issued:</th>
+                        <td>{{student.createdAt}}</td>
+                        
+                    </tr>
+                    <tr>
+                        <th>Received From:</th>
+                        <td>{{student.parentId.fatherName}}</td>
+                        <th>Academic Year / Term :</th>
+                        <td>{{year}} / {{term}}</td>
+                    </tr>
+                    <tr>
+                        <th>Amount in Figures :</th>
+                        <td>{{payment.amount}}</td>
+                        <th>Amount in Words :</th>
+                        <td>{{word}} Ghana cedis only</td>
+                    </tr>
+                    <tr>
+                        <th>Areas:</th>
+                        <td>{{areas}}</td>
+                        <th>Balance: </th>
+                        <td>{{balance}}</td>
+                    </tr>
+            </table>
+        
+          </div><!-- End Search Bar -->
+        </center>
+    </div>
+</section>
+    
+</script>
+{%endblock%}

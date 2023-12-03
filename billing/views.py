@@ -116,8 +116,8 @@ def edit(request,id):
 def search(request):
     searchKey = request.POST.get('searchkey')
     if searchKey:
-        filteedStudent = Students.objects.filter(studentNo = searchKey)
-        searchResult  = Bills.objects.filter(Q(billNo = searchKey) | Q(name__startswith = searchKey)| Q(student = filteedStudent))
+        filteedStudent = Students.objects.filter(Q(studentNo = searchKey) | Q(firstname__contains = searchKey) | Q(lastname__contains = searchKey) | Q(middlename__contains = searchKey)).first()
+        searchResult  = Bills.objects.filter(Q(billNo = searchKey) | Q(student = filteedStudent))
         return render(request,"billview.html",{'parents':searchResult})
     else:
         return render(request,"feeview.html")
