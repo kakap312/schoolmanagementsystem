@@ -6,9 +6,9 @@ urlpatterns = [
     # path("dashboard/fee/filter", views.filter, name = 'filterfee'),
     path("dashboard/payment/receipt/<int:id>", views.receipt),
     path("dashboard/payment/newentry", views.add, name = 'newentrypayment'),
-    # path("dashboard/fee/search", views.search, name = 'searchfee'),
+    path("dashboard/payment/search", views.search,name = 'searchpayment'),
     path("dashboard/payment/delete/<int:id>", views.delete),
-    # path("dashboard/fee/edit/<int:id>", views.edit, name = 'editfee')
+    path("dashboard/payment/edit/<int:id>", views.edit, name = 'editpayment')
 ]
 
 

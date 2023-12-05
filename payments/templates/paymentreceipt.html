@@ -15,11 +15,11 @@
         </div><br>
         
         
-        <div class="col-md-9" id="paymentreceiptsection">
+        <div class="col-md-9" id="paymentreceiptsection" style="background-color: #f6f9ff;">
             <center>
             <div>
-                <img src="{% static 'assets/img/apple-touch-icon.png' %}" alt="">
-                <h4> Official Receipt</h4>
+                <img src="{% static 'assets/img/receiptheader.jpg' %}" alt="">
+                <h4 style="margin:20px;"> Official Receipt</h4>
             </div>
                 <table class="table">
                     <tr>
@@ -48,11 +48,13 @@
                         <td>{{balance}}</td>
                     </tr>
             </table>
-        
+            <div id="signatures" style="display: inline;">
+                <p style="float: right; margin: 15px;">Received By: ...........................................................  / Signature: ......................................</p>
+               
+              </div>
           </div><!-- End Search Bar -->
+          
         </center>
     </div>
 </section>
-    
-</script>
 {%endblock%}
