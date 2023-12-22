@@ -6,6 +6,6 @@ urlpatterns = [
     # path("dashboard/class/filter", views.add, name = ''),
     # path("dashboard/class/newentry", views.addParent, name = 'newentryclass'),
     # path("dashboard/class/search", views.searchParent, name = 'searchclass'),
-    # path("dashboard/class/delete/<int:id>", views.deleteParent, name = 'deleteclass'),
-    # path("dashboard/class/edit/<int:id>", views.editParent, name = 'editclass')
+    path("dashboard/settings/delete/<int:id>", views.delete),
+    path("dashboard/settings/edit/<int:id>", views.edit, name = 'editclass')
 ]

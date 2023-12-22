@@ -1,0 +1,78 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{%block pagetitle%}
+<h1>Balances</h1>
+
+{%endblock%}
+
+
+{%block body%}
+<div class="row">
+    <div class="col-md-12">
+        {%include 'balanceheader.html'%}
+    </div>
+
+    <div class="col-md-12">
+        <div class="search-bar"  style="border:1px solid grey; padding: 10px;">
+            <form action = "{% url 'balancesingleview' %}" class="search-form d-flex align-items-center" method="POST" >
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert"> ×</button>
+                        <strong>{{message}}</strong>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+            {%for field in forms%}
+                <div style="margin-right:8px;">{{field|as_crispy_field}}</div>
+
+            {%endfor%}
+            <div class="form-group">
+                <button type="submit" class="btn form-control btn-primary rounded submit px-3"style = "width:200px;">Filter
+                    </button>
+            </div>
+            </form>
+          </div><!-- End Search Bar --><br>
+    </div>
+
+    <div class="col-md-12"><br>
+            
+        {%if balances|length == 0 %}
+        <h3>No record found</h3>
+        {%else%}
+        <hr><h3>Student Balance Info:</h3><hr>
+        <table class="table">
+            <tr>
+                <th>Student Name</th>
+                
+                <th>Total Bill Amt(GHC):</th>
+                <th>Total Payment Amt(GHC):</th>
+                <th>Year</th>
+                <th>Term:</th>
+                <th>Areas:</th>
+                <th>{{bills|length}}</th>
+            </tr>
+        
+        {% for bill in balances.bills %}
+        <tr>
+            <!-- <td>{{balance.student.firstname |add:" " | add:balance.student.middlename | add:" " | add:balance.student.lastname}}</td> -->
+            <td>{{balance.billAmount}}</td>
+            <td>{{balance.paymentAmount}}</td>
+            <td>{{bill.year}}</td>
+            <td></td>
+        </tr>
+
+        {%endfor%}
+    
+        {%endif%}
+
+    </table>
+  </div><!-- End Search Bar -->
+
+</div>
+
+
+
+{%endblock%}

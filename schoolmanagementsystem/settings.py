@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "enrolment",
     "mathfilters",
     "billing",
+    "balances",
     "subjects",
     "payments",
     "num2words"

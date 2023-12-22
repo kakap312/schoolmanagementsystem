@@ -35,19 +35,39 @@
         </form>
     </div>
     <div class="col-md-6">
-        <h3>Academic Calender Settings Infomation:</h3><hr>
-        <table class="table">
-            <tr>
-                <th>Academic Year</th>
-                <th>Academic Term</th>
-            </tr>
-        <tr>
-            <td>{{year}}</td>
-            <td>{{term}}</td>
-        </tr>
-     
+        <div class="search-bar">
+            <form action = "search" class="search-form d-flex align-items-center" method="POST" >
+                {% csrf_token %}
+                <input class="form-control form-control-sm" style="width: 100%;" type="text" name="searchkey" placeholder="Year / Term" title="Enter search keyword">
+              <button type="submit" title="Search" style="margin-bottom: 20px;"><i class="bi bi-search"></i></button>
+            </form>
+          </div><!-- End Search Bar --><br>
 
-    </table>
+        {%if settings|length == 0%}
+                <h4>No Data Found </h4>
+                {%else%}
+               
+                <table class="table">
+                    <tr>
+                        <th>No:</th>
+                        <th>Year</th>
+                        <th>Term:</th>
+                        <th>Status:</th>
+                        <th>Actions:</th>
+                    </tr>
+            
+                {% for setting in settings%}
+                <tr>
+                    <td>{{setting.id}}</td>
+                    <td>{{setting.year}}</td>
+                    <td>{{setting.term}}</td>
+                    <td>{{setting.status}}</td>
+                    <td><a href="/dashboard/settings/delete/{{setting.id}}"><button class =" btn btn-danger btn-sm">Delete</button></a> &nbsp<a href="/dashboard/settings/edit/{{setting.id}}"><button class = "btn btn-secondary btn-sm">Edit</button></a></td>
+                </tr>
+                {%endfor%}
+                {%endif%}
+
+            </table>
 
     </div>
 

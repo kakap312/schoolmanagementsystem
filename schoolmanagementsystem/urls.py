@@ -27,6 +27,7 @@ urlpatterns = [
     path("", include("fees.urls")),
      path("", include("subjects.urls")),
     path("", include("billing.urls")),
+    path("", include("balances.urls")),
     path("", include("enrolment.urls")),
     path("", include("core.urls")),
     path('admin/', admin.site.urls)
